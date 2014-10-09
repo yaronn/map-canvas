@@ -4916,12 +4916,11 @@ function Map(options, canvas) {
    this.iCANVAS_START_Y_POS = 0,
    this.iCANVAS_HEIGHT = this.options.height || 790,
    this.iCANVAS_WIDTH = this.options.width || 1580,
-   this.iSPACE_FOR_LABEL = this.options.labelSpace || 30,
+   this.iSPACE_FOR_LABEL = this.options.labelSpace==undefined ? 30 : this.options.labelSpace,
    this.iMAP_START_X_POS = this.iCANVAS_START_X_POS + this.iSPACE_FOR_LABEL,
    this.iMAP_START_Y_POS = this.iCANVAS_START_Y_POS + this.iSPACE_FOR_LABEL,
    this.iMAP_HEIGHT = this.iCANVAS_HEIGHT - (this.iSPACE_FOR_LABEL * 2),
    this.iMAP_WIDTH = this.iCANVAS_WIDTH - (this.iSPACE_FOR_LABEL * 2);
-
    this.canvas = canvas
    if (canvas.getContext) this.ctx = canvas.getContext('2d')
    else console.log("Canvas not supported!")
