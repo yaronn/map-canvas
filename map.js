@@ -4921,6 +4921,7 @@ function Map(options, canvas) {
    this.iMAP_START_Y_POS = this.iCANVAS_START_Y_POS + this.iSPACE_FOR_LABEL,
    this.iMAP_HEIGHT = this.iCANVAS_HEIGHT - (this.iSPACE_FOR_LABEL * 2),
    this.iMAP_WIDTH = this.iCANVAS_WIDTH - (this.iSPACE_FOR_LABEL * 2);
+   
    this.canvas = canvas
    if (canvas.getContext) this.ctx = canvas.getContext('2d')
    else console.log("Canvas not supported!")
@@ -4929,6 +4930,8 @@ function Map(options, canvas) {
 
 Map.prototype.draw = function() {
 
+   this.ctx.clearRect(0, 0, this.options.width, this.options.height)
+   
    // Draw the background
    if (!this.options.disableBackground) this.drawBackground();
 
