@@ -145,7 +145,7 @@ Map.prototype.drawGraticule = function() {
 
    // Style
    this.ctx.lineWidth = 0.2;
-   this.ctx.strokeStyle = "rgba(0, 0, 0, 0.1)";
+   this.ctx.strokeStyle = 'rgba(0, 0, 0, 0.1)';
    this.ctx.fillStyle = 'rgb(255,255,255)';
 
    // Font styling
@@ -4832,15 +4832,22 @@ Map.prototype.getMapData = function() {
    return json;
 }
 
-//TODO: allow specify if marker is text or shape
-Map.prototype.addMarker = function(coord) {
-
+Map.prototype.addMarker = function(coord, marker_type) {   
    var x = this.degreesOfLongitudeToScreenX(coord.lat)   
    var y = this.degreesOfLatitudeToScreenY(coord.lon)   
-   this.ctx.font = '20pt Calibri';
-   this.ctx.fillStyle = 'red';
    
-   this.ctx.fillText("X", x, y)
+   if (marker_type==="round") {
+      this.ctx.strokeStyle = "yellow"
+      this.ctx.fillStyle = "yellow"
+      this.ctx.beginPath();
+      this.ctx.arc(x,y,5,0,2*Math.PI);
+      this.ctx.fill();
+   }
+   else {
+      this.ctx.font = '20pt Calibri';
+      this.ctx.fillStyle = 'red';   
+      this.ctx.fillText("X", x, y)
+   }
 }
 
 Map.prototype.drawLandMass = function() {   
@@ -4855,7 +4862,8 @@ Map.prototype.drawLandMass = function() {
       iPointCouner;
 
    // A lighter shade of green
-   this.ctx.fillStyle = 'rgb(0,204,0)';
+   this.ctx.fillStyle = this.options.shapeColor || 'rgb(0,204,0)';
+   if (this.options.shapeColor) this.ctx.strokeStyle = this.options.shapeColor;
 
    // Iterate around the shapes and draw
    for (iShapeCounter = 0; iShapeCounter < landMass.shapes.length; iShapeCounter++) {
@@ -4924,7 +4932,7 @@ function Map(options, canvas) {
    
    this.canvas = canvas
    if (canvas.getContext) this.ctx = canvas.getContext('2d')
-   else console.log("Canvas not supported!")
+   else console.log("Canvas not supported!")      
 
 }
 
