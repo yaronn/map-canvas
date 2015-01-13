@@ -1,6 +1,6 @@
 {
-  "name": "canvas-map",
-  "version": "1.0.0",
+  "name": "map-canvas",
+  "version": "0.0.1",
   "description": "",
   "main": "map.js",
   "scripts": {
@@ -9,6 +9,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "drawille-canvas": "git+https://git@bitbucket.org/yaronn01/node-drawille-canvas.git"
+    "drawille-canvas": "drawille-canvas-blessed-contrib"
   }
 }
