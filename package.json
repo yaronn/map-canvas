@@ -1,6 +1,6 @@
 {
   "name": "map-canvas",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "",
   "main": "map.js",
   "scripts": {
@@ -13,6 +13,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "drawille-canvas": ">=0.0.1"
+    "drawille-canvas-blessed-contrib": ">=0.0.1"
   }
 }

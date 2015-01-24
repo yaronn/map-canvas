@@ -4832,22 +4832,13 @@ Map.prototype.getMapData = function() {
    return json;
 }
 
-Map.prototype.addMarker = function(coord, marker_type) {   
-   var x = this.degreesOfLongitudeToScreenX(coord.lat)   
-   var y = this.degreesOfLatitudeToScreenY(coord.lon)   
-   
-   if (marker_type==="round") {      
-      this.ctx.strokeStyle = "red"
-      this.ctx.fillStyle = "red"
-      this.ctx.beginPath();
-      this.ctx.arc(x,y,5,0,2*Math.PI);
-      this.ctx.fill();
-   }
-   else {      
-      this.ctx.font = '20pt Calibri';
-      this.ctx.fillStyle = 'red';   
-      this.ctx.fillText("X", x, y)      
-   }
+Map.prototype.addMarker = function(options) {
+   var x = this.degreesOfLongitudeToScreenX(options.lat)   
+   var y = this.degreesOfLatitudeToScreenY(options.lon)   
+      
+   this.ctx.font = '20pt Calibri';
+   this.ctx.fillStyle = options.color || 'red';   
+   this.ctx.fillText(options.char || "X", x, y)
 }
 
 Map.prototype.drawLandMass = function() {   

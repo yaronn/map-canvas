@@ -2,7 +2,7 @@
 var Canvas = require('drawille-canvas-blessed-contrib').Canvas
 var Map = require('./map')
 
-var size = {height: 100, width: 140}
+var size = {height: 140, width: 220}
 canvas = new Canvas(size.width, size.height)
 var ctx = canvas.getContext()
 ctx.strokeStyle="green"
@@ -19,6 +19,6 @@ var options = { excludeAntartica: true
 
 var map = new Map(options, canvas)
 map.draw()
-map.addMarker( {"lon" : "37", "lat" : "-122" })
+map.addMarker( {"lon" : "37", "lat" : "-122", color: "red", char: "X" } )
 
 console.log(ctx._canvas.frame());
