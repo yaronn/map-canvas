@@ -4832,21 +4832,24 @@ Map.prototype.getMapData = function() {
    return json;
 }
 
-Map.prototype.addMarker = function(coord, marker_type) {   
+Map.prototype.addMarker = function(coord, marker_type, options) {   
    var x = this.degreesOfLongitudeToScreenX(coord.lat)   
-   var y = this.degreesOfLatitudeToScreenY(coord.lon)   
+   var y = this.degreesOfLatitudeToScreenY(coord.lon)
+   var options = options || {};
+   var color = options.color || "red"
+   var character = options.character || "X"
    
    if (marker_type==="round") {      
-      this.ctx.strokeStyle = "red"
-      this.ctx.fillStyle = "red"
+      this.ctx.strokeStyle = color;
+      this.ctx.fillStyle = color;
       this.ctx.beginPath();
       this.ctx.arc(x,y,5,0,2*Math.PI);
       this.ctx.fill();
    }
    else {      
       this.ctx.font = '20pt Calibri';
-      this.ctx.fillStyle = 'red';   
-      this.ctx.fillText("X", x, y)      
+      this.ctx.fillStyle = color;   
+      this.ctx.fillText(character, x, y);      
    }
 }
 
