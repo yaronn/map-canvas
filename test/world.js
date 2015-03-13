@@ -1,6 +1,6 @@
 
 var Canvas = require('drawille-canvas-blessed-contrib').Canvas
-var Map = require('./map')
+var Map = require('../map')
 
 var size = {height: 140, width: 220}
 canvas = new Canvas(size.width, size.height)

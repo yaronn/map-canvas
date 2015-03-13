@@ -31,23 +31,27 @@ Map.prototype.drawMapBackground = function() {
 
 Map.prototype.degreesOfLatitudeToScreenY = function(iDegreesOfLatitude) {
 
-   var offset = this.options.excludeAntartica?30:0
+   var minLat = this.options.startLat
+      , maxLat = this.options.endLat
 
    // Make the value positive, so we can calculate the percentage
-   var iAdjustedDegreesOfLatitude = (iDegreesOfLatitude * 1) + 90 - offset,
+   var iAdjustedDegreesOfLatitude = (iDegreesOfLatitude * 1) + 90,
       iDegreesOfLatitudeToScreenY = 0;
 
+   if (iAdjustedDegreesOfLatitude < minLat || iAdjustedDegreesOfLatitude > maxLat) {
+      return
+   }
    // Are we at the South pole?
-   if (iAdjustedDegreesOfLatitude === 0) {
+   if (iAdjustedDegreesOfLatitude === minLat) {
       // Screen Y is the botton of the map (avoid divide by zero)
       iDegreesOfLatitudeToScreenY = this.iMAP_HEIGHT + this.iMAP_START_Y_POS;
-   } else if (iAdjustedDegreesOfLatitude > (180-offset)) {
+   } else if (iAdjustedDegreesOfLatitude === maxLat) {
       // Are we at the North pole (or beyond)?
       // Screen Y is the top of the map
       iDegreesOfLatitudeToScreenY = this.iMAP_START_Y_POS;
    } else {
       // Convert the latitude value to screen X      
-      iDegreesOfLatitudeToScreenY = (this.iMAP_HEIGHT - (iAdjustedDegreesOfLatitude * (this.iMAP_HEIGHT / (180-offset))) + this.iMAP_START_Y_POS);
+      iDegreesOfLatitudeToScreenY = (this.iMAP_HEIGHT - ( (iAdjustedDegreesOfLatitude-minLat) * (this.iMAP_HEIGHT / (maxLat-minLat) )) + this.iMAP_START_Y_POS);
    }
 
    return iDegreesOfLatitudeToScreenY;
@@ -79,20 +83,26 @@ Map.prototype.drawLongitudeLines = function(iDEGREES_BETWEEN_GRID_LINES) {
 
 Map.prototype.degreesOfLongitudeToScreenX = function(iDegreesOfLongitude) {
     
+   var minLon = this.options.startLon
+     , maxLon = this.options.endLon
+
    // Make the value positive, so we can calculate the percentage
    var iAdjustedDegreesOfLongitude = (iDegreesOfLongitude * 1) + 180,
       iDegreesOfLongitudeToScreenX = 0;
 
+   if (iAdjustedDegreesOfLongitude < minLon || iAdjustedDegreesOfLongitude > maxLon) {
+      return
+   }
    // Are we at the West -180 point?
-   if (iAdjustedDegreesOfLongitude === 0) {
+   if (iAdjustedDegreesOfLongitude === minLon) {
       // Screen X is the left of the map (avoid divide by zero)
       iDegreesOfLongitudeToScreenX = this.iMAP_START_X_POS;
-   } else if (iAdjustedDegreesOfLongitude > 360) {
+   } else if (iAdjustedDegreesOfLongitude === maxLon) {
       // If the longitude crosses the 180 line fix it (doesn't translat to screen well)
       iDegreesOfLongitudeToScreenX = this.iMAP_START_X_POS + this.iMAP_WIDTH;
    } else {
       // Convert the longitude value to screen X
-      iDegreesOfLongitudeToScreenX = (this.iMAP_START_X_POS + (iAdjustedDegreesOfLongitude * (this.iMAP_WIDTH / 360)));
+      iDegreesOfLongitudeToScreenX = (this.iMAP_START_X_POS + ( (iAdjustedDegreesOfLongitude-minLon) * (this.iMAP_WIDTH / (maxLon-minLon))));
    }
 
    return iDegreesOfLongitudeToScreenX;
