@@ -59891,8 +59891,8 @@ Map.prototype.getMapData_world = function() {
 }
 
 Map.prototype.addMarker = function(options) {
-   var x = this.degreesOfLongitudeToScreenX(options.lat)   
-   var y = this.degreesOfLatitudeToScreenY(options.lon)   
+   var x = this.degreesOfLongitudeToScreenX(options.lon)   
+   var y = this.degreesOfLatitudeToScreenY(options.lat)   
       
    this.ctx.font = '20pt Calibri';
    this.ctx.fillStyle = options.color || 'red';   

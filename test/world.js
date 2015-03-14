@@ -19,6 +19,6 @@ var options = { excludeAntartica: true
 
 var map = new Map(options, canvas)
 map.draw()
-map.addMarker( {"lon" : "37", "lat" : "-122", color: "red", char: "X" } )
+map.addMarker( {"lon" : "-122", "lat" : "37", color: "red", char: "X" } )
 
 console.log(ctx._canvas.frame());
